@@ -3,13 +3,13 @@ import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import React, { useState } from 'react';
-// import About from './components/About';
+import About from './components/About';
 import Alert from './components/Alert';
-// import {
-//     BrowserRouter as Router,
-//     Routes,
-//     Route,
-// } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+} from "react-router-dom";
 
 
 function App() {
@@ -26,7 +26,16 @@ function App() {
         }, 1500);
     }
 
-    const toggleMode = () => {
+    const removeBodyClasses = () => {
+        document.body.classList.remove('bg-light')
+        document.body.classList.remove('bg-dark')
+        document.body.classList.remove('bg-primary')
+    }
+
+    const toggleMode = (cls) => {
+        removeBodyClasses();
+        document.body.classList.add('bg-' + cls)
+
         if (mode === 'light') {
             setMode('dark')
             document.body.style.backgroundColor = '#162648'
@@ -42,24 +51,24 @@ function App() {
     }
     return (
         <>
-            {/* <Router>
+            <Router>
                 <Navbar title="Textutils" mode={mode} toggleMode={toggleMode} />
                 <Alert alert={alert} />
                 <div className="container my-3">
                     <Routes>
-                        <Route path="/about" exact element={<About />} ></Route>
+                        <Route path="/about" exact element={<About mode={mode} />} ></Route>
                         <Route path="/" exact element={<TextForm showAlert={showAlert} heading="Enter the text to analyze" mode={mode} />}> </Route>
                     </Routes>
                 </div>
-            </Router> */}
+            </Router>
 
 
-            <Navbar title="Textutils" mode={mode} toggleMode={toggleMode} />
+            {/* <Navbar title="Textutils" mode={mode} toggleMode={toggleMode} />
             <Alert alert={alert} />
             <div className="container my-3">
-                {/* <About /> */}
+                <About />
                 <TextForm showAlert={showAlert} heading="Enter the text to analyze" mode={mode} />
-            </div>
+            </div> */}
 
         </>
     );
